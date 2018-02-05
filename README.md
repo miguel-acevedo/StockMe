@@ -1,4 +1,4 @@
-This project was created as a portilio built with stock insight analysis.
+This project was created as a portfolio built with stock insight analysis & simulations.
 
 ## Stack
 ReactJS for DOM manipualation,
