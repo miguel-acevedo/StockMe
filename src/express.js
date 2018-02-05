@@ -17,11 +17,15 @@ app.get('/', (req, res) => {
 
 		res.writeHead(200, {'Content-Type': 'application/json'});
 
+		var dummy = {
+			"stock":"AAPL"
+		}
+
 	var url = 'https://finance.google.com/finance?q='+ stockName +'&output=json';
 	var request = require("request");
+	// Part below is causing all the delay
 	request(url, function (error, response1, body) {
 		if (!error && res.statusCode == 200) {
-			 //var jsonObject = JSON.parse(response);
 				 body = body.substring(body.indexOf("/") + 1);
 
 				 //console.log(body);
@@ -29,7 +33,7 @@ app.get('/', (req, res) => {
 				 res.end(body.slice(1));
 
 				 }
-	});
+	}); 
 
 })
 
