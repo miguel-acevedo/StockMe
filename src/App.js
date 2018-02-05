@@ -22,8 +22,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    var url = 'http://localhost:2000'
-    Request.post(url).set('stock', 'AAPL').then((response) => {
+
+    var url = 'http://localhost:2000/?stock=TWTR';
+    //.set('stock', 'AAPL')
+    Request.get(url).then((response) => {
       //console.log(response.body[0]);
 
       this.setState({
@@ -51,7 +53,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Stock Watcher, built just for you.</h1>
+          <h1 className="App-title">Test React</h1>
         </header>
         {welcomeMsg()}
       </div>
