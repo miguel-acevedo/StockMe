@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import QuickAdd from './quickAdd';
 import Request from 'superagent';
 import _ from 'lodash';
 var unirest = require('unirest');
@@ -50,13 +51,33 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Test React</h1>
-        </header>
-        {welcomeMsg()}
-      </div>
+      <div>
+        <section className="hero is-dark">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                Stock Watcher
+              </h1>
+              <h2 className="subtitle">
+                Your portilio and insights, all in one place.
+              </h2>
+            </div>
+          </div>
+
+        </section>
+        <div className="container">
+          {welcomeMsg()}
+          <hr/>
+          <div className="columns">
+            <div className="column is-one-third">
+              <QuickAdd/>
+            </div>
+            <div className="column is-half">is-half</div>
+            <div className="column is-one-third">Watch List</div>
+          </div>
+        </div>
+
+    </div>
     );
   }
 }

@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 				 res.end(body.slice(1));
 
 				 }
-	}); 
+	});
 
 })
 
