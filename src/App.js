@@ -29,10 +29,12 @@ class App extends Component {
     Request.get(url).then((response) => {
       //console.log(response.body[0]);
 
+      //console.log(response.body);
+
       this.setState({
-        data: response.body[0],
-        price: response.body[0].l,
-        name: response.body[0].name
+        data: response.body,
+        //price: response.body[0].l,
+        //name: response.body[0].name
       });
 
     });
@@ -41,11 +43,12 @@ class App extends Component {
   render() {
     var stock = this.state.data;
 
-    function welcomeMsg()
+    function WelcomeMsg()
     {
       return(
         <p className="App-intro">
-          {stock.name}'s stock price is: {stock.l}
+          {// {stock.name}'s stock price is: {stock.l}   }
+        }
         </p>
         );
     }
@@ -66,11 +69,11 @@ class App extends Component {
 
         </section>
         <div className="container">
-          {welcomeMsg()}
+          <WelcomeMsg/>
           <hr/>
           <div className="columns">
             <div className="column is-one-third">
-              <QuickAdd/>
+              <QuickAdd stock={stock}/>
             </div>
             <div className="column is-half">is-half</div>
             <div className="column is-one-third">Watch List</div>

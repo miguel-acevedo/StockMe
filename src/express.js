@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var yahooFinance = require('yahoo-finance');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -11,7 +12,7 @@ app.use(function(req, res, next) {
 
 app.get('/', (req, res) => {
 
-	var stockName = req.query.stock;
+		var stockName = req.query.stock;
 
 		res.setHeader('Access-Control-Allow-Credentials', true);
 
@@ -21,6 +22,15 @@ app.get('/', (req, res) => {
 			"stock":"AAPL"
 		}
 
+
+		// This replaces the deprecated snapshot() API
+		yahooFinance.quote({
+		  symbols: [stockName, "AAPL", "TWTR", "WMT", "FB", "WFC", "MCD", "PSO"],
+		  modules: [ 'price', 'summaryDetail' ] // see the docs for the full list
+		}, function (err, quotes) {
+		  res.end(JSON.stringify(quotes));
+		});
+/*
 	var url = 'https://finance.google.com/finance?q='+ stockName +'&output=json';
 	var request = require("request");
 	// Part below is causing all the delay
@@ -34,6 +44,7 @@ app.get('/', (req, res) => {
 
 				 }
 	});
+*/
 
 })
 

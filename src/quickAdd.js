@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 class quickAdd extends Component {
   render() {
 
+    var columnStyle = {
+      width: "110%"
+    }
+
+    var stocks = this.props.stock;
+    console.log(stocks);
+
+    function CheckSign(price){
+      if ( price > 0)
+        return '+';
+    }
+
     return(
       <nav className="panel">
               <p className="panel-heading">
@@ -23,42 +35,29 @@ class quickAdd extends Component {
                 <a>sources</a>
                 <a>forks</a>
               </p>
-              <a className="panel-block is-active">
+              {/* <a className="panel-block">
                 <span className="panel-icon">
                   <i className="fas fa-book" />
                 </span>
                 bulma
-              </a>
-              <a className="panel-block">
-                <span className="panel-icon">
-                  <i className="fas fa-book" />
-                </span>
-                marksheet
-              </a>
-              <a className="panel-block">
-                <span className="panel-icon">
-                  <i className="fas fa-book" />
-                </span>
-                minireset.css
-              </a>
-              <a className="panel-block">
-                <span className="panel-icon">
-                  <i className="fas fa-book" />
-                </span>
-                jgthms.github.io
-              </a>
-              <a className="panel-block">
-                <span className="panel-icon">
-                  <i className="fas fa-code-branch" />
-                </span>
-                daniellowtw/infboard
-              </a>
-              <a className="panel-block">
-                <span className="panel-icon">
-                  <i className="fas fa-code-branch" />
-                </span>
-                mojs
-              </a>
+              </a>  */}
+              {Object.keys(stocks).map((item, i) => 
+                <a key={i} className="panel-block">
+                  <div className="columns" style={columnStyle}>
+                    <span></span>
+                    <div className="column is-half">
+                    {stocks[item].price.symbol}
+                    </div>
+                    <div className="column is-one-quarters">
+                      ${stocks[item].price.regularMarketPrice.toFixed(2)}
+                    </div>
+                    <div className="column is-one-quarters">
+                    {CheckSign(stocks[item].price.regularMarketChangePercent)}
+                    {(stocks[item].price.regularMarketChangePercent * 100).toFixed(2)}
+                    </div>
+                 </div>
+                </a>
+              )}
               <label className="panel-block">
                 <input type="checkbox" />
                 remember me
