@@ -4,6 +4,7 @@ import './App.css';
 import QuickAdd from './quickAdd';
 import Request from 'superagent';
 import _ from 'lodash';
+import { subscribeToTimer } from './api';
 var unirest = require('unirest');
 var yahooFinance = require('yahoo-finance');
 var getJSON = require('get-json');
@@ -18,12 +19,19 @@ class App extends Component {
     super();
     this.state = {
       data: [],
-      name: "miguel"
+      name: "miguel",
+      timestamp: 'no timestamp yet'
     };
+
+
+    subscribeToTimer((err, timestamp) => this.setState({ 
+      data: timestamp 
+    }));
+
   }
 
   componentDidMount() {
-
+/*
     var url = 'http://localhost:2000/?stock=TWTR';
     //.set('stock', 'AAPL')
     Request.get(url).then((response) => {
@@ -38,6 +46,7 @@ class App extends Component {
       });
 
     });
+    */
 }
 
   render() {

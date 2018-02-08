@@ -46,14 +46,14 @@ class quickAdd extends Component {
                   <div className="columns" style={columnStyle}>
                     <span></span>
                     <div className="column is-half">
-                    {stocks[item].price.symbol}
+                    {stocks[item].price.symbol} | {stocks[item].summaryDetail.bid}
                     </div>
                     <div className="column is-one-quarters">
-                      ${stocks[item].price.regularMarketPrice.toFixed(2)}
+                      ${stocks[item].price.regularMarketPrice.toFixed(5)}
                     </div>
                     <div className="column is-one-quarters">
                     {CheckSign(stocks[item].price.regularMarketChangePercent)}
-                    {(stocks[item].price.regularMarketChangePercent * 100).toFixed(2)}
+                    {(stocks[item].price.regularMarketChangePercent * 100).toFixed(5)}
                     </div>
                  </div>
                 </a>
