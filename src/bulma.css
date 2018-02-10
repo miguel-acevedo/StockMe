@@ -2122,9 +2122,18 @@ a.box:active {
 }
 
 .button.is-success {
-  background-color: #23d160;
+  background-color: #31923B;
   border-color: transparent;
   color: #fff;
+}
+
+.bigPercent {
+  padding-left: 9px !important;
+  padding-right: 9px !important;
+}
+
+.smallPercent p {
+  font-size: 17px;
 }
 
 .button.is-success:hover, .button.is-success.is-hovered {
@@ -2320,7 +2329,8 @@ a.box:active {
 }
 
 .button.is-danger {
-  background-color: #ff3860;
+  /* background-color: #ff3860; */
+  background-color: #F83A38;
   border-color: transparent;
   color: #fff;
 }

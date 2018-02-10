@@ -3,7 +3,18 @@ const socket = openSocket('http://localhost:2200');
 
 function subscribeToTimer(cb) {
   socket.on('timer', timestamp => cb(null, timestamp));
-  socket.emit('subscribeToTimer', 10000);
+  // Sends below to server
+  var stockRequest = {
+  	name: "Miguel"
+  }
+  socket.emit('subscribeToTimer', stockRequest);
 }
 
-export { subscribeToTimer }
+function subscribeToNewStock(cb, symbol) {
+  socket.on('stockInfo', stock => cb(null, stock));
+  // Sends below to server
+
+  socket.emit('subscribeToNewStock', symbol);
+}
+
+export { subscribeToTimer, subscribeToNewStock }

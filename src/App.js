@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import QuickAdd from './quickAdd';
-import Request from 'superagent';
-import _ from 'lodash';
-import { subscribeToTimer } from './api';
+import { subscribeToTimer, subscribeToNewStock } from './api';
 var unirest = require('unirest');
-var yahooFinance = require('yahoo-finance');
-var getJSON = require('get-json');
-var request = require("request");
-//var request = require("request");
-//var cors = require('cors');
-//var express = require('express');
+
 
 class App extends Component {
 
@@ -19,18 +11,26 @@ class App extends Component {
     super();
     this.state = {
       data: [],
-      name: "miguel",
+      newStock: [],
       timestamp: 'no timestamp yet'
     };
-
-
-    subscribeToTimer((err, timestamp) => this.setState({ 
-      data: timestamp 
-    }));
 
   }
 
   componentDidMount() {
+
+    subscribeToTimer((err, timestampee) => this.setState({ 
+      data: timestampee
+    }));
+/*
+      subscribeToNewStock((err, stockInfo) => {
+
+          console.log(stockInfo);
+
+          this.setState({
+              newStock: stockInfo })
+      } , "AAPL");
+*/
 /*
     var url = 'http://localhost:2000/?stock=TWTR';
     //.set('stock', 'AAPL')
@@ -51,16 +51,50 @@ class App extends Component {
 
   render() {
     var stock = this.state.data;
+    if (stock)
+    var stock = this.state.data;
+    var temp = stock;
 
-    function WelcomeMsg()
-    {
-      return(
-        <p className="App-intro">
-          {// {stock.name}'s stock price is: {stock.l}   }
+function onView(){
+    console.log("Clicked button");
+
+    subscribeToNewStock((err, stockInfo) => {
+
+        console.log(stockInfo);
+
+        this.setState({
+            newStock: stockInfo })
+    } , "AAPL");
+}
+
+const logStock = (message) => {
+    subscribeToNewStock((err, stockInfo) => {
+
+        console.log(stockInfo);
+
+        var dataAll = [];
+// ...
+        //dataAll = Object.values(stock);
+        //dataAll.unshift(Object.values(stockInfo)[0]);
+
+        var tempData = {};
+
+        for ( var index in stockInfo ) {
+            tempData[index] = stockInfo[index];
         }
-        </p>
-        );
-    }
+        for ( var index in stock ) {
+            tempData[index] = stock[index];
+        }
+
+        console.log(tempData);
+
+
+            this.setState({
+                data: tempData })
+    } , message);
+}
+
+var testFunc = () => { console.log("test") };
 
     return (
       <div>
@@ -71,18 +105,17 @@ class App extends Component {
                 Stock Watcher
               </h1>
               <h2 className="subtitle">
-                Your portilio and insights, all in one place.
+                Your portfolio and insights, all in one place.
               </h2>
             </div>
           </div>
 
         </section>
         <div className="container">
-          <WelcomeMsg/>
           <hr/>
           <div className="columns">
             <div className="column is-one-third">
-              <QuickAdd stock={stock}/>
+              <QuickAdd addFunc={logStock} stock={stock}/>
             </div>
             <div className="column is-half">is-half</div>
             <div className="column is-one-third">Watch List</div>
