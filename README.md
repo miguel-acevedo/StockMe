@@ -6,3 +6,5 @@ ExpressJS/NodeJS for endpoints
 
 Current Trello board:
 https://trello.com/b/aO72M6MN/stockme
+
+![alt text](https://i.imgur.com/ytNQVB1.png)
